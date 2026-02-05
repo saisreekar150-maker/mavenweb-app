@@ -1,46 +1,121 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/maven-v4_0_0.xsd">
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example</groupId>
-  <artifactId>my-maven-app</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>my-maven-app</name>
-  <url>http://maven.apache.org</url>
+    <!-- Project Info -->
+    <groupId>com.company.app</groupId>
+    <artifactId>mavenweb-app</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+    <name>mavenweb-app</name>
 
-    <!-- Servlet API -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>5.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+    <!-- ========================= -->
+    <!-- PROPERTIES -->
+    <!-- ========================= -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.4.0</version>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+        <!-- Java -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <!-- Sonar -->
+        <sonar.projectKey>mavenweb-app</sonar.projectKey>
+        <sonar.projectName>mavenweb-app</sonar.projectName>
+	<sonar.host.url>http://13.234.32.90:9000</sonar.host.url>
+	<sonar.java.binaries>target/classes</sonar.java.binaries>
+    </properties>
+
+    <!-- ========================= -->
+    <!-- DEPENDENCIES -->
+    <!-- ========================= -->
+    <dependencies>
+
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ========================= -->
+    <!-- NEXUS REPOSITORIES -->
+    <!-- ========================= -->
+    <repositories>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://43.205.198.234/:8081/repository/dbs-release/</url>
+        </repository>
+
+        <repository>
+            <id>nexus-snapshots</id>
+            <url>http://43.205.198.234:8081/repository/dbs-snapshot/</url>
+        </repository>
+    </repositories>
+
+    <!-- ========================= -->
+    <!-- WHERE ARTIFACT IS UPLOADED -->
+    <!-- ========================= -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+	    <url>http://43.205.198.234:8081/repository/dbs-release/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://43.205.198.234:8081/repository/dbs-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- ========================= -->
+    <!-- BUILD PLUGINS -->
+    <!-- ========================= -->
+    <build>
+        <plugins>
+
+            <!-- Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <!-- WAR Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+
+            <!-- Sonar Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.10.0.2594</version>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
 
