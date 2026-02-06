@@ -1,1 +1,1 @@
-server is integrated with sonar, nexus, tomcat and jenkins
+new application page has been deployed
