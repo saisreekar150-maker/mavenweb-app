@@ -5,37 +5,29 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Project Info -->
-    <groupId>com.company.app</groupId>
+    <groupId>com.mithun</groupId>
     <artifactId>mavenweb-app</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>mavenweb-app</name>
+    <name>Mithun Web Application</name>
 
-    <!-- ========================= -->
-    <!-- PROPERTIES -->
-    <!-- ========================= -->
+    <!-- ================= PROPERTIES ================= -->
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Java -->
+        <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <!-- Sonar -->
-        <sonar.projectKey>mavenweb-app</sonar.projectKey>
-        <sonar.projectName>mavenweb-app</sonar.projectName>
-	<sonar.host.url>http://13.234.32.90:9000</sonar.host.url>
-	<sonar.java.binaries>target/classes</sonar.java.binaries>
+        <!-- SONAR -->
+        <sonar.projectKey>mithun-maven-webapp</sonar.projectKey>
+        <sonar.projectName>Mithun Maven WebApp</sonar.projectName>
+        <sonar.host.url>http://13.234.202.39:9000</sonar.host.url>
     </properties>
 
-    <!-- ========================= -->
-    <!-- DEPENDENCIES -->
-    <!-- ========================= -->
+    <!-- ================= DEPENDENCIES ================= -->
     <dependencies>
 
-        <!-- Servlet API -->
+        <!-- Servlet API (Provided by Tomcat) -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -43,61 +35,27 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JUnit -->
+        <!-- JSP API -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
 
-    <!-- ========================= -->
-    <!-- NEXUS REPOSITORIES -->
-    <!-- ========================= -->
-    <repositories>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://43.205.198.234/:8081/repository/dbs-release/</url>
-        </repository>
-
-        <repository>
-            <id>nexus-snapshots</id>
-            <url>http://43.205.198.234:8081/repository/dbs-snapshot/</url>
-        </repository>
-    </repositories>
-
-    <!-- ========================= -->
-    <!-- WHERE ARTIFACT IS UPLOADED -->
-    <!-- ========================= -->
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-	    <url>http://43.205.198.234:8081/repository/dbs-release/</url>
-        </repository>
-
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://43.205.198.234:8081/repository/dbs-snapshot/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <!-- ========================= -->
-    <!-- BUILD PLUGINS -->
-    <!-- ========================= -->
+    <!-- ================= BUILD ================= -->
     <build>
+        <finalName>mavenweb-app</finalName>
+
         <plugins>
 
-            <!-- Compiler -->
+            <!-- Java Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
             </plugin>
 
             <!-- WAR Plugin -->
@@ -105,6 +63,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
 
             <!-- Sonar Plugin -->
@@ -116,6 +77,35 @@
 
         </plugins>
     </build>
+
+    <!-- ================= NEXUS REPOS ================= -->
+    <repositories>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://35.154.33.203:8081/repository/dbs-release/</url>
+        </repository>
+
+        <repository>
+            <id>nexus-snapshots</id>
+            <url>http://35.154.33.203:8081/repository/dbs-snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- ================= DEPLOY TO NEXUS ================= -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://35.154.33.203:8081/repository/dbs-release/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://35.154.33.203:8081/repository/dbs-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
 
